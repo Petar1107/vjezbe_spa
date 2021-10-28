@@ -5,6 +5,7 @@
 #include <stdlib.h>
 int* filtriraj(int* niz,int n,int th,int* nth)
 {
+    *nth=0;
     for(int i=0;i<n;i++)
     {
         if(niz[i]<th)
@@ -37,7 +38,7 @@ void ispis_niza(int* niz, int n)
 {
     for(int i=0;i<n;i++)
     {
-        printf("%d",niz[i]);
+        printf("%d\n",niz[i]);
     }
 }
 int main(void)
