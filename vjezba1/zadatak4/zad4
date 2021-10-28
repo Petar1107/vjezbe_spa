@@ -1,3 +1,4 @@
+
 /*ZADATAK 4:
 Deklarirati strukturu Tocka koja sadrži dva člana: x i y (oba su float).
 Deklarirati strukturu Poligon koja se sadrži dva člana: niz vrhova (svaki vrh u nizu je Tocka) i broj vrhova n.
@@ -26,7 +27,7 @@ typedef struct
 
 poligon* novi_poligon(float *niz_x, float *niz_y, int n)
 {
-	if (n <= 3)
+	if (n >= 3)
 	{
 		poligon *p = (poligon*)malloc(sizeof(poligon));
 
@@ -49,20 +50,21 @@ poligon* novi_poligon(float *niz_x, float *niz_y, int n)
 
 tocka** pozitivni(poligon *p, int *np)
 {
-	int j = 0, brojac = 0;
+	int br_pozitivnih = 0;
 	for (int i = 0; i < (*np); i++)
 	{
-		if ((0 < p->niz_t[i].x) && (0 < p->niz_t[i].y))
+		if ((p->niz_t[i].x > 0) && (p->niz_t[i].y > 0))
 		{
-			brojac++;
+			br_pozitivnih++;
 		}
 	}
 
-	tocka** poz = (tocka**)malloc(sizeof(tocka*)* brojac);
+	tocka** poz = (tocka**)malloc(sizeof(tocka*)* (br_pozitivnih));
 
+	int j = 0;
 	for (int i = 0; i < (*np); i++)
 	{
-		if ((0 > p->niz_t[i].x) && (0 > p->niz_t[i].y))
+		if ((p->niz_t[i].x > 0) && (p->niz_t[i].y > 0))
 		{
 			poz[j] = p->niz_t+i;
 			j++;
@@ -73,7 +75,7 @@ tocka** pozitivni(poligon *p, int *np)
 	return poz;
 }
 
-int main()
+int main(void)
 {
 	int n;
 	printf("Unesite broj tocaka: ");
@@ -92,8 +94,9 @@ int main()
 		printf("x%d: %f   y%d: %f\n",i+1, p->niz_t[i].x, i+1,p->niz_t[i].y);
 	}
 	tocka** poz = pozitivni(p, &n);
-	printf("Negativne tocke poligona su :\n");
+	printf("Pozitivne tocke poligona su :\n");
 	for (int i = 0; i < n; i++)
 		printf("%f %f\n", poz[i]->x, poz[i]->y);
 }
+
 
