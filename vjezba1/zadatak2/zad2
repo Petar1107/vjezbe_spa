@@ -1,0 +1,58 @@
+//int* filtriraj(int *niz, int n, int th, int *nth)
+//– vraæa novi niz koji sadrži brojeve iz originalnog niza koji su manji od th.
+//Originalni niz ima dužinu n. Dužinu novog niza sa brojevima koji su prošli filter treba spremiti u nth.
+#include <stdio.h>
+#include <stdlib.h>
+int* filtriraj(int* niz,int n,int th,int* nth)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(niz[i]<th)
+        {
+            (*nth)++;
+        }
+    }
+    int* novi;
+    novi=(int*)malloc(sizeof(int)*(*nth));
+    int j=0;
+    for(int i=0;i<n;i++)
+    {
+        if(niz[i]<th)
+        {
+            novi[j]=niz[i];
+            j++;
+        }
+    }
+    return novi;
+}
+void unos_niza(int* niz,int n)
+{
+    printf("unesite clanove niza: \n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&niz[i]);
+    }
+}
+void ispis_niza(int* niz, int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%d",niz[i]);
+    }
+}
+int main(void)
+{
+    int* niz;
+    int* novi;
+    int n,th,nth;
+    printf("unesite broj clanova niza: \n ");
+    scanf("%d",&n);
+    niz=(int*)malloc(sizeof(int)*n);
+    unos_niza(niz,n);
+    printf("unesite broj th: \n");
+    scanf("%d",&th);
+    novi=filtriraj(niz,n,th,&nth);
+    ispis_niza(novi,nth);
+    return 0;
+
+}
